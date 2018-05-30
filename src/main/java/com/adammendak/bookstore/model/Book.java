@@ -1,8 +1,6 @@
 package com.adammendak.bookstore.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -18,8 +16,10 @@ import java.util.Date;
             name = Book.FIND_ALL,
             query = "SELECT b from Book b order by b.title desc ")
 })
-@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "book")
@@ -57,7 +57,7 @@ public class Book  extends AbstractTimestampableEntity {
     private Integer numberOfPages;
 
     @Column(name = "img_url", length = 1000)
-    @Size(min = 1, min = 1000)
+    @Size(min = 1, max = 1000)
     private String imgUrl;
 
     @Column(name = "language")
