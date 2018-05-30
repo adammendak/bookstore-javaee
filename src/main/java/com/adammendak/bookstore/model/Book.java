@@ -10,12 +10,23 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@NamedQueries({
+        @NamedQuery(
+            name = Book.COUNT_ALL,
+            query = "SELECT count (b) from Book b order by b.title desc"),
+        @NamedQuery(
+            name = Book.FIND_ALL,
+            query = "SELECT b from Book b order by b.title desc ")
+})
 @Data
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 public class Book  extends AbstractTimestampableEntity {
+
+    public static final String COUNT_ALL = "Book.countAll";
+    public static final String FIND_ALL = "Book.findAll";
 
     @Id
     @GeneratedValue
