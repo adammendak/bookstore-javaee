@@ -7,7 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
+
+import static javax.transaction.Transactional.TxType.REQUIRED;
 
 @Stateless
 @NoArgsConstructor
@@ -20,11 +23,13 @@ public class BookRepository {
         return entityManager.find(Book.class, id);
     }
 
+    @Transactional(REQUIRED)
     public Book create (Book book) {
         entityManager.persist(book);
         return book;
     }
 
+    @Transactional(REQUIRED)
     public void delete (Long id) {
         entityManager.remove(entityManager.getReference(Book.class, id));
     }
